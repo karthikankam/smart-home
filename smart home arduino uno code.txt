@@ -1,0 +1,83 @@
+#include <Servo.h>
+ 
+Servo ms;
+void setup() {
+  // put your setup code here, to run once:
+pinMode(13,OUTPUT);
+pinMode(6,OUTPUT);
+pinMode(12,INPUT);
+pinMode(11,OUTPUT);
+pinMode(10,OUTPUT);
+pinMode(3,OUTPUT);
+pinMode(2,OUTPUT);
+Serial.begin(9600);
+ms.attach(4);
+}
+void loop() {
+  // put your main code here, to run repeatedly:
+while(Serial.available()>0){
+char d=Serial.read();
+Serial.println(d);
+        if(d=='3'){
+for(int u=0;u<10;u++){
+int y=digitalRead(12);
+Serial.println(y);
+
+
+     if(y==1){
+for(int j=1;j<=5;j++){
+for(int i=255;i>=0;i--){
+analogWrite(6,i);
+delay(10);
+}
+for(int q=1;q<=10;q++){digitalWrite(13,HIGH);
+delay(10);
+digitalWrite(13,LOW);
+delay(100);
+}
+}
+}delay(1000);
+}}
+ else if(d=='A'){
+  digitalWrite(11,LOW);
+digitalWrite(10,LOW);
+digitalWrite(3,LOW);
+digitalWrite(2,LOW);
+delay(1500);
+for(int i=1;i<=3;i++){
+digitalWrite(11,HIGH);
+delay(100);
+digitalWrite(11,LOW);
+digitalWrite(10,HIGH);
+delay(100);
+digitalWrite(10,LOW);
+digitalWrite(3,HIGH);
+delay(100);
+digitalWrite(3,LOW);
+delay(500);
+}
+digitalWrite(11,HIGH);
+digitalWrite(10,HIGH);
+digitalWrite(3,HIGH);
+digitalWrite(6,HIGH);
+delay(30);
+digitalWrite(6,LOW);
+delay(100);
+digitalWrite(6,HIGH);
+delay(30);
+digitalWrite(6,LOW);
+ms.write(120);
+}
+  else if(d=='B'){ms.write(0);
+      digitalWrite(11,LOW);
+digitalWrite(10,LOW);
+digitalWrite(3,LOW);
+digitalWrite(2,LOW);}
+        else if(d=='1'){digitalWrite(13,HIGH);}
+       else if(d=='0'){digitalWrite(6,LOW);
+        digitalWrite(13,LOW);}
+        else{tone(6,100);
+        delay(1000);
+        noTone(6);}
+}
+}
